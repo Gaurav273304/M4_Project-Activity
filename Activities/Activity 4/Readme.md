@@ -17,9 +17,9 @@ INSERT INTO Productions1(Productionid,Productionname,Address,Dateofstarted,Owner
 
 select * from Production1;
 
-+--------------+----------------------------+-----------+---------------+------------------+
+
 | Productionid | Productionname             | Address   | Dateofstarted | Ownername        |
-+--------------+----------------------------+-----------+---------------+------------------+
+|:------------:|:--------------------------:|:---------:|--------------:|-----------------:|
 |         9091 | Arkamediaworks             | Hyderabad |          2001 | Shobu Yarlagadda |
 |         8892 | Lyca Productions           | Chennai   |          2014 | Subaskaran       |
 |         1010 | Hari om Entertainment      | Mumbai    |          2008 | Akshay Kumar     |
@@ -31,6 +31,6 @@ select * from Production1;
 |         1854 | Junglee Pictures           | Mumbai    |          2014 | Vineeth Jain     |
 |         2341 | CRM                        | Banglore  |          2017 | Manohar          |
 |         1111 | STP                        | Chennai   |          2018 | Sree             |
-+--------------+----------------------------+-----------+---------------+------------------+
+
 
 
