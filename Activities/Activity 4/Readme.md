@@ -25,7 +25,6 @@ INSERT INTO Productions1(Productionid,Productionname,Address,Dateofstarted,Owner
 
 INSERT INTO Productions1(Productionid,Productionname,Address,Dateofstarted,Ownername) VALUES(1111,'STP','Chennai',2018,'Sree');
 
-
 select * from Production1;
 
 
