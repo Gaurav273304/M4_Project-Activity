@@ -1,0 +1,315 @@
+------------------------production table framework Activities--------------------
+package com.ltts.productionproject.main;
+import java.util.List;
+import java.util.Scanner;
+import com.ltts.productionproject.bo.ProductionBo;
+import com.ltts.productionproject.model.Production;
+public class MainProject {
+	public static void main(String[] args) throws Exception {
+
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		System.out.println("1. Insert");
+		System.out.println("2. View Productionid");
+		System.out.println("3. View Productionname");
+		System.out.println("4. Update productions1 ");
+		System.out.println("5. Delete productions1");
+		ProductionBo pb= new ProductionBo();
+
+		int n=s.nextInt();
+		switch(n) {
+
+			case 1:
+
+				System.out.println("INSERT Production INFO");
+
+				System.out.println("Enter the Production ID");
+
+				int pno=s.nextInt();
+
+				System.out.println("Enter the Production Name");
+
+			    String pname=s.next();
+
+				
+
+				System.out.println("Enter the Address");
+
+				String Address=s.next();
+
+				System.out.println("Enter the Date Of started");
+
+				int Dateofstarted=s.nextInt();
+
+				
+
+				System.out.println("Enter the Owner Name");
+
+				String Ownername=s.next();
+
+				//Write the DB logic
+
+				Production p1=new Production(pno,pname,Address,Dateofstarted,Ownername);
+
+				boolean b=pb.insertProductions1(p1);
+
+				if(b==false) {
+
+					System.out.println("Value inserted...");
+				}
+				break;
+
+			case 2:
+
+				System.out.println("Productions Id are");
+
+			
+
+				List<Production> li=pb.getAllproduction();
+
+				for(Production p2:li) {
+
+					System.out.println(p2);
+
+				}
+
+				break;
+
+			case 3:
+
+				System.out.println("Enter the production name");
+
+				String sk=s.next();
+
+				//DB logic
+
+				break;
+
+			case 4:
+
+				System.out.println("Enter the production Address");
+
+				String pno1=s.next();
+
+				//DB Logic
+
+				break;
+
+			case 5:
+
+				System.out.println("Enter the player number to REmove from the list");
+
+				int pno2=s.nextInt();
+
+				//DB Logic
+
+				break;
+
+			}
+		}	 
+
+	} 
+
+----------------------------------------------------------------------------------------------------------------------------
+package com.ltts.productionproject.model;
+
+ 
+
+public class Production 
+{
+	private int Productionid;
+	private String Productionname;
+	private String Address;
+	private int Dateofstarted;
+    private String Ownername;
+
+	public Production() 
+	{
+
+		super();
+
+	}
+
+	public Production(int Productionid,String Productionname,String Address,int Dateofstarted,String Ownername)
+	{
+
+		super();
+        this.Productionid = Productionid;
+        this.Productionname = Productionname;
+        this.Address = Address;
+        this.Dateofstarted = Dateofstarted;
+        this.Ownername = Ownername;
+
+	}
+	public int getProductionid() {
+		return Productionid;
+	}
+
+	public void setProductionid(int Productionid) {
+		this.Productionid = Productionid;
+	}
+
+	public String getProductionname() {
+		return Productionname;
+	}
+
+	public void setProductionName(String ProductionName) {
+		this.Productionname = Productionname;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+
+	public int getDateofstarted() {
+		return Dateofstarted;
+	}
+
+	public void setDateofstarted(int dateofstarted) {
+		Dateofstarted = dateofstarted;
+	}
+
+	public String getOwnername() {
+		return Ownername;
+	}
+
+	public void setOwnername(String ownername) {
+		Ownername = ownername;
+	}
+	
+	public String toString() {
+
+		return "productions [Productionid=" +Productionid + ", Productionname=" +Productionname + ", Address=" +Address + ", Dateofstarted;="
+
+				+ Dateofstarted + ",Ownername=" +Ownername + "]";
+
+	}
+
+}
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+
+package com.ltts.productionproject.bo;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import com.ltts.productionproject.model.Production;
+
+public class ProductionBo {
+	public boolean insertProductions1(Production p)throws Exception{
+		//DB logic
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/productions","root","G@u273304");
+		Statement s=c.createStatement();
+		boolean b=s.execute("insert into Productions1 values("+p.getProductionid()+",'"+p.getProductionname()+"','"+p.getAddress()+"',"+p.getDateofstarted()+",'"+p.getOwnername()+"')");
+		c.close();
+		return b;
+	}
+	public List<Production> getAllproduction()throws Exception{
+		List<Production> al=new ArrayList<Production>();
+		//DB Logic
+		//Class.forName()
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/productions", "root","G@u273304");
+
+		PreparedStatement ps=c.prepareStatement("select * from productions1");
+
+		ResultSet rs=ps.executeQuery();
+
+		while(rs.next()) {
+			al.add(new Production(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5)));
+
+		}
+
+		c.close();
+
+		return al;
+
+	}
+
+    public List<Production> getProductionBySkill(String skill) throws Exception{
+
+    	List<Production> li=new ArrayList<Production>();
+    	//Apply DB Logic
+
+    	return li;
+
+    }
+
+    public boolean updateProduction(Production p)throws Exception{
+
+    	//Apply DB Logic
+
+    	return false;
+
+    }
+
+    public boolean deleteProduction(int Production)throws Exception{
+
+    	return false;
+
+    }
+
+    public Production getProductionById(int Productionid)throws Exception{
+
+    	Production p=new Production();
+
+    	return p;
+
+    }
+
+
+
+		}
+
+before insert table
+mysql> select * from productions1;
++--------------+----------------------------+-----------+---------------+------------------+
+| Productionid | Productionname             | Address   | Dateofstarted | Ownername        |
++--------------+----------------------------+-----------+---------------+------------------+
+|         1010 | Hari om Entertainment      | Mumbai    |          2008 | Akshay Kumar     |
+|         1111 | STP                        | Chennai   |          2018 | Sree             |
+|         1789 | Tseries                    | Mumbai    |          1995 | Bhusan           |
+|         1854 | Junglee Pictures           | Mumbai    |          2014 | Vineeth Jain     |
+|         1899 | Viacom18 Studios           | Mumbai    |          2008 | Ajit Andhare     |
+|         1988 | Red Chillies Entertainment | Mumbai    |          2003 | Shah Ruck        |
+|         2341 | CRM                        | Banglore  |          2017 | Manohar          |
+|         6773 | Hombale Flims              | Banglore  |          1995 | Vijay            |
+|         7682 | Mythri Movie Makers        | Hyderabad |          2014 | Naveen Yeneni    |
+|         7882 | DVV Entertainments         | Hyderabad |          1993 | DVV Danayya      |
+|         8892 | Lyca Productions           | Chennai   |          2014 | Subaskaran       |
+|         9091 | Arkamediaworks             | Hyderabad |          2001 | Shobu Yarlagadda |
++--------------+----------------------------+-----------+---------------+------------------+
+
+after insert table
+mysql> select * from productions1;
++--------------+----------------------------+-----------+---------------+------------------+
+| Productionid | Productionname             | Address   | Dateofstarted | Ownername        |
++--------------+----------------------------+-----------+---------------+------------------+
+|         1010 | Hari om Entertainment      | Mumbai    |          2008 | Akshay Kumar     |
+|         1111 | STP                        | Chennai   |          2018 | Sree             |
+|         1789 | Tseries                    | Mumbai    |          1995 | Bhusan           |
+|         1854 | Junglee Pictures           | Mumbai    |          2014 | Vineeth Jain     |
+|         1899 | Viacom18 Studios           | Mumbai    |          2008 | Ajit Andhare     |
+|         1988 | Red Chillies Entertainment | Mumbai    |          2003 | Shah Ruck        |
+|         2341 | CRM                        | Banglore  |          2017 | Manohar          |
+|         3456 | good                       | bhosari   |          2009 | mishra           |<---------------------------------------- inserted
+|         6773 | Hombale Flims              | Banglore  |          1995 | Vijay            |
+|         7682 | Mythri Movie Makers        | Hyderabad |          2014 | Naveen Yeneni    |
+|         7882 | DVV Entertainments         | Hyderabad |          1993 | DVV Danayya      |
+|         8892 | Lyca Productions           | Chennai   |          2014 | Subaskaran       |
+|         9091 | Arkamediaworks             | Hyderabad |          2001 | Shobu Yarlagadda |
++--------------+----------------------------+-----------+---------------+------------------+
+13 rows in set (0.00 sec)
+
+
+ 
