@@ -1,0 +1,4 @@
+com\ltts\playerproj\controller\playerprojectcontroller.class
+com\ltts\playerproj\model\player.class
+com\ltts\playerproj\bo\playerbo.class
+com\ltts\playerproj\PlayerprojApplication.class
